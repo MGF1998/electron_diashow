@@ -1,0 +1,14 @@
+html,body{
+    font-family: "Roboto", Arial, sans-serif;
+    background-image: url("bg.jpg");
+    margin: 0;
+}
+#image{
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    text-align:center;
+}
+#content{
+    display:none;
+}
