@@ -1,5 +1,6 @@
 const {app, BrowserWindow} = require('electron');
 const url = require("url");
+const path = require("path");
 let win; 
 const createWindow = function (w,h,t) {
     win = new BrowserWindow({width:w,height:h});
@@ -8,8 +9,8 @@ const createWindow = function (w,h,t) {
         protocol: 'file:',
         slashes: true
     }));
+    win.on("closed",()=>{win = null;});
 }
-win.on("closed",()=>{win = null;});
 app.on("ready",()=>{createWindow(800,600,"index.html")});
 app.on("window-all-closed",()=>{
     if (process.platform !== "darwin") {
