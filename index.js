@@ -17,7 +17,7 @@ let imagelist = fs.readdirSync("./images");
 const imageRefresh = function () {
     pos.nextimage = pos.image+1;
     if (pos.nextimage >= imagelist.length) {pos.nextimage = 0;}
-    nextimage.show();
+    nextimage.fadeIn(options.image.fade_time/2);
     nextimage.attr("src","./images/"+imagelist[pos.nextimage]);
     image.fadeOut(options.image.fade_time,()=>{
         image.attr("src","./images/"+imagelist[pos.image]);
