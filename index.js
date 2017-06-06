@@ -11,13 +11,11 @@ let pos = {
 };
 let contentlist = fs.readdirSync("./content");
 let imagelist = fs.readdirSync("./images");
-let timer;
 
 const imageRefresh = function () {
     image.attr("src","./images/"+imagelist[pos.image]);
     pos.image++; pos.cycle++;
     if (pos.image >= imagelist.length) {pos.image = 0;}
-    if (pos.cycle >= options.content.spacing) {clearInterval(timer)}
 };
 
 const contentRefresh = function() {
@@ -29,33 +27,24 @@ const contentRefresh = function() {
     if (pos.content >= contentlist.length) {pos.content = 0;}
 };
 
-imageRefresh();
-contentRefresh();
+const contentSequence = function(){
+    contentRefresh();
+    $(image).fadeOut(300);
+    $(content).fadeIn(300);
+    setTimeout(()=>{
+        $(image).fadeIn(300);
+        $(content).fadeOut(300);
+        interval = setInterval(imageInterval,options.image.display_time);
+    },options.content.display_time);
+};
+const imageInterval = function() {
+    if (pos.cycle >= options.content.spacing) {
+        pos.cycle = 0;
+        clearInterval(interval);
+        contentSequence();
+    } else {
+        imageRefresh();
+    }
+};
 
-let nextContent = new Promise(function(resolve,reject){
-    timer = setInterval(imageRefresh,options.image.display_time);
-});
-
-
-/* for (let i=0; i<options.content.spacing;i++) {
-    setTimeout(imageRefresh,options.image.display_time);
-}
-console.log("bar");
-contentRefresh();
-image.fadeOut(400);
-content.fadeIn(400);
-setTimeout(()=>{
-    console.log("bez");
-    content.fadeOut(400);
-    image.fadeIn(400);
-},options.content.display_time);
-*/
-
-
-
-
-
-
-
-
-
+let interval = setInterval(imageInterval,options.image.display_time);
