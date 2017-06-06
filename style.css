@@ -4,7 +4,7 @@ html,body{
     margin: 0;
     padding: 20px 40px;
 }
-#image {
+#image,#nextimage {
     position: fixed;
     left: 0;
     right: 0;
@@ -12,14 +12,22 @@ html,body{
     bottom: 0;
     text-align: center;
 }
-#image img {
+#image img,#nextimage img {
     max-width: 99%;
     max-height: 100%;
     min-height: 100%;
-    transition: opacity 1s ease-in-out;
+    /*transition: opacity 1s ease-in-out;*/
 }
+#image {
+    z-index: 3;
+}
+#nextimage {
+    z-index: 2;
+}
+
 #content{
     display: none;
+    z-index: 1;
 }
 h1 {
     font-size: 4em;
